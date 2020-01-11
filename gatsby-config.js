@@ -27,6 +27,17 @@ module.exports = {
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
       },
     },
+    {
+      resolve: `gatsby-source-wordpress`,
+      options: {
+        baseUrl: `admin.interiorrising.com`,
+        protocol: `http`,
+        hostingWPCOM: false,
+        useACF: true,
+        verbose: true,
+      },
+    },
+
     `gatsby-plugin-typescript`,
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
