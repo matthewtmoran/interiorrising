@@ -1,61 +1,47 @@
 import React from "react"
-import { Link } from "gatsby"
-
-import Image from "../components/image"
+import styled from "@emotion/styled"
+import { graphql, useStaticQuery } from "gatsby"
 import SEO from "../components/seo"
+import Hero from "../components/hero"
+import Layout from "./../components/Layout"
 
-const button = {
-  color: "yellow",
-  padding: ".5rem 1rem",
-  background: "linear-gradient( hotpink, #18a5c3) ",
+const breakpoints = [576, 768, 992, 1200]
+
+const mq = breakpoints.map(bp => `@media (min-width: ${bp}px)`)
+
+const ImageBackground = styled("div")`
+  background-image: url("/images/building-and-trees.jpg");
+  background-position: top 20% center;
+  background-size: cover;
+  height: 100vh;
+
+  + * {
+    margin-top: 0;
+  }
+`
+
+const IndexPage = () => {
+  const { image } = useStaticQuery(graphql`
+    query {
+      image: file(relativePath: { eq: "building-and-trees.jpg" }) {
+        sharp: childImageSharp {
+          fluid {
+            ...GatsbyImageSharpFluid_withWebp
+          }
+        }
+      }
+    }
+  `)
+  return (
+    <>
+      <ImageBackground Tag="section" fluid={image.sharp.fluid} fadeIn="soft">
+        <Layout>
+          <SEO title="Home" />
+          <Hero />
+        </Layout>
+      </ImageBackground>
+    </>
+  )
 }
-
-const IndexPage = () => (
-  <div
-    style={{
-      display: "flex",
-      flexDirection: "column",
-      alignContent: "center",
-      justifyContent: "center",
-      margin: "auto",
-    }}
-  >
-    <SEO title="Home" />
-    <div
-      style={{
-        width: "300px",
-        maxWidth: `300px`,
-        margin: "auto",
-        maxHeight: `300px`,
-        borderRadius: "50%",
-        border: "4px solid yellow",
-        overflow: "hidden",
-      }}
-    >
-      <Image />
-    </div>
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-        padding: "1rem",
-        margin: "1rem",
-      }}
-    >
-      <Link to="/about/" style={button}>
-        About
-      </Link>
-      <Link to="/contact/" style={button}>
-        Contact
-      </Link>
-      <Link to="/coaching/" style={button}>
-        Coaching
-      </Link>
-      <Link to="/interior-rising/" style={button}>
-        Interior Rising
-      </Link>
-    </div>
-  </div>
-)
 
 export default IndexPage
