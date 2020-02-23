@@ -3,6 +3,7 @@ import styled from "@emotion/styled"
 
 const ButtonContainer = styled("div")`
   width: 30px;
+  height: 30px;
   position: relative;
   transform: rotate(0deg);
   transition: 0.5s ease-in-out;
