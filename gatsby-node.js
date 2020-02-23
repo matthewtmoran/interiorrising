@@ -60,7 +60,7 @@ exports.createPages = async ({ graphql, actions }) => {
       },
     })
   })
-  const postTemplate = path.resolve(`./src/templates/BlogPost.tsx`)
+  const postTemplate = path.resolve(`./src/templates/blog-post.tsx`)
   result.data.allWordpressPost.edges.forEach(edge => {
     createPage({
       // will be the url for the page

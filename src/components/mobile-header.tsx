@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import MenuButton from "./MenuButton"
+import MenuButton from "./menu-button"
 
 interface IMobileHeader {}
 

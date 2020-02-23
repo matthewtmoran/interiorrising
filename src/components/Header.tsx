@@ -1,8 +1,8 @@
 import React, { useState, useRef } from "react"
 import { Link } from "gatsby"
 import styled from "@emotion/styled"
-import MenuButton from "./MenuButton"
-import useOutsideClick from "./../hooks/useOutsideClick"
+import MenuButton from "./menu-button"
+import useOutsideClick from "../hooks/use-outside-click"
 
 const HeaderContainer = styled("header")`
   background: transparent;

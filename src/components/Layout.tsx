@@ -10,7 +10,7 @@ import styled from "@emotion/styled"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 
-import Header from "./Header"
+import Header from "./header"
 import "./layout.css"
 
 const MainContainer = styled("main")`
