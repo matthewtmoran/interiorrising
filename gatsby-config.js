@@ -12,6 +12,7 @@ module.exports = {
     `gatsby-plugin-sharp`,
     `gatsby-plugin-typescript`,
     `gatsby-plugin-react-helmet`,
+    `@bumped-inc/gatsby-plugin-optional-chaining`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {

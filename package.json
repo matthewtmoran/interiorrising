@@ -5,8 +5,13 @@
   "version": "0.1.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/plugin-proposal-optional-chaining": "^7.8.3",
+    "@bumped-inc/gatsby-plugin-optional-chaining": "^1.0.0",
     "@emotion/core": "^10.0.27",
     "@emotion/styled": "^10.0.27",
+    "@loadable/component": "^5.12.0",
+    "browser-monads": "^1.0.0",
     "gatsby": "^2.17.6",
     "gatsby-background-image": "^0.9.13",
     "gatsby-image": "^2.2.30",

@@ -15,7 +15,7 @@ interface IBlogPost {
         name: string
       }
       acf: {
-        featured_image: {
+        featured_image: null | {
           localFile: {
             childImageSharp: {
               sizes: any
@@ -38,13 +38,16 @@ const BlogPost: React.FunctionComponent<IBlogPost> = ({ data }) => {
       <p>
         Written by {data.wordpressPost.author.name} on {data.wordpressPost.date}
       </p>
-      <Img
-        sizes={
-          data.wordpressPost.acf.featured_image.localFile.childImageSharp.sizes
-        }
-        alt={data.wordpressPost.title}
-        style={{ maxHeight: 450 }}
-      />
+
+      {data.wordpressPost.acf.featured_image?.localFile.childImageSharp.sizes &&
+        <Img
+          sizes={
+            data.wordpressPost.acf.featured_image.localFile.childImageSharp.sizes
+          }
+          alt={data.wordpressPost.title}
+          style={{ maxHeight: 450 }}
+        />
+      }
       <div
         style={{ marginTop: 20 }}
         dangerouslySetInnerHTML={{ __html: data.wordpressPost.content }}
@@ -54,8 +57,8 @@ const BlogPost: React.FunctionComponent<IBlogPost> = ({ data }) => {
 }
 
 export const query = graphql`
-  query($id: Int!) {
-    wordpressPost(wordpress_id: { eq: $id }) {
+  query($id: String) {
+    wordpressPost(id: { eq: $id }) {
       title
       content
       excerpt

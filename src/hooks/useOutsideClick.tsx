@@ -1,4 +1,5 @@
 import { useLayoutEffect } from "react"
+import { document } from "browser-monads"
 
 function useOutsideClick(ref, handler, when = true) {
   if ("ontouchstart" in document.documentElement) {
