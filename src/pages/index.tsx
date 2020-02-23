@@ -1,31 +1,17 @@
 import React from "react"
-import styled from "@emotion/styled"
+import { css } from "@emotion/core"
 import { graphql, useStaticQuery } from "gatsby"
 import SEO from "../components/seo"
 import Hero from "../components/hero"
 import Layout from "../components/layout"
-
-const breakpoints = [576, 768, 992, 1200]
-
-const mq = breakpoints.map(bp => `@media (min-width: ${bp}px)`)
-
-const ImageBackground = styled("div")`
-  background-image: url("/images/building-and-trees.jpg");
-  background-position: top 20% center;
-  background-size: cover;
-  height: 100vh;
-
-  + * {
-    margin-top: 0;
-  }
-`
+import BackgroundImage from "gatsby-background-image"
 
 const IndexPage = () => {
   const { image } = useStaticQuery(graphql`
     query {
       image: file(relativePath: { eq: "building-and-trees.jpg" }) {
         sharp: childImageSharp {
-          fluid {
+          fluid(quality: 100) {
             ...GatsbyImageSharpFluid_withWebp
           }
         }
@@ -34,12 +20,26 @@ const IndexPage = () => {
   `)
   return (
     <>
-      <ImageBackground Tag="section" fluid={image.sharp.fluid} fadeIn="soft">
+      <BackgroundImage
+        Tag="section"
+        fluid={image.sharp.fluid}
+        fadeIn="soft"
+        backgroundColor="#fff"
+        css={css`
+          background-position: top 20% center;
+          background-size: cover;
+          height: 100vh;
+
+          + * {
+            margin-top: 0;
+          }
+        `}
+      >
         <Layout>
           <SEO title="Home" />
           <Hero />
         </Layout>
-      </ImageBackground>
+      </BackgroundImage>
     </>
   )
 }
