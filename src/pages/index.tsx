@@ -3,7 +3,7 @@ import styled from "@emotion/styled"
 import { graphql, useStaticQuery } from "gatsby"
 import SEO from "../components/seo"
 import Hero from "../components/hero"
-import Layout from "./../components/layout"
+import Layout from "../components/layout"
 
 const breakpoints = [576, 768, 992, 1200]
 
