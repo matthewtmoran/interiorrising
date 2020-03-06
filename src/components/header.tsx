@@ -89,7 +89,7 @@ const Header = ({ siteTitle }) => {
       <Navigation>
         <NavLinks open={open} ref={ref}>
           <StyledLink to="/">Words</StyledLink>
-          <StyledLink to="/">Photos</StyledLink>
+          <StyledLink to="/photos">Photos</StyledLink>
           <StyledLink to="/">Contact</StyledLink>
         </NavLinks>
       </Navigation>
