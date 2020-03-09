@@ -20,8 +20,10 @@ const MainContainer = styled("main")`
   flex-direction: column;
   justify-content: flex-start;
 
+  margin: auto;
+
   @media (min-width: 420px) {
-    flex-direction: row;
+    max-width: 1400px;
     justify-content: center;
   }
 `
@@ -43,7 +45,7 @@ const Layout = ({ children }) => {
       <div
         style={{
           margin: `0 auto`,
-          maxWidth: 960,
+          maxWidth: 1400,
           padding: `0px 1.45rem`,
           paddingTop: 0,
           // height: "100%",
