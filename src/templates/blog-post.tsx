@@ -22,6 +22,13 @@ const MasonryContainer = styled("div")`
     margin-bottom: 5px; /* space between items */
   }
 
+  .masonry-grid {
+    margin-left: -5px; /* gutter size offset */
+  }
+  .masonry-grid_column {
+    padding-left: 5px; /* gutter size offset */
+  }
+
   @media (min-width: 420px) {
     .masonry-grid {
       margin-left: -15px; /* gutter size offset */
@@ -38,8 +45,8 @@ const breakpointColumnsObj = {
   default: 4,
   1100: 3,
   700: 2,
-  500: 1
-};
+  500: 2,
+}
 
 interface IBlogPost {
   data: {
@@ -63,7 +70,6 @@ interface IBlogPost {
     }
   }
 }
-
 
 const BlogPost: FunctionComponent<IBlogPost> = ({ data }) => {
   return (
@@ -155,8 +161,8 @@ const replaceMedia = (node: DomElement) => {
       <Masonry
         style={{ display: "flex", width: "100%" }}
         className="masonry-grid"
-        columnClassName={"masonry-grid_column"} 
-        breakpointCols={breakpointColumnsObj }
+        columnClassName={"masonry-grid_column"}
+        breakpointCols={breakpointColumnsObj}
       >
         {node.children.map(n => replaceMedia(n))}
       </Masonry>
