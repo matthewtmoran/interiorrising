@@ -53,15 +53,6 @@ module.exports = {
         normalizer: function({ entities }) {
           return entities
         },
-        plugins: [
-          {
-            resolve: `gatsby-wordpress-inline-images`,
-            options: {
-              baseUrl: `admin.interiorrising.com`,
-              protocol: `http`,
-            },
-          },
-        ],
       },
     },
     {
