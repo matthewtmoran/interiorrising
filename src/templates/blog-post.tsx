@@ -1,13 +1,16 @@
 import React, { FunctionComponent } from "react"
-import { graphql } from "gatsby"
-import Layout from "../components/layout"
-import SEO from "../components/seo"
-import Img from "gatsby-image"
 import parse from "html-react-parser"
 import PostImage from "../components/post-image"
 import { DomElement } from "domhandler"
 import Masonry from "react-masonry-css"
 import styled from "@emotion/styled"
+import { format } from "date-fns"
+
+const BlogPostContainer = styled("div")`
+  width: 100%;
+  margin-top: 3rem;
+  text-align: center;
+`
 
 const DateText = styled("p")`
   font-style: italic;
@@ -49,81 +52,29 @@ const breakpointColumnsObj = {
 }
 
 interface IBlogPost {
-  data: {
-    wordpressPost: {
-      title: string
-      excerpt: string
-      date: string
-      content: string
-      author: {
-        name: string
-      }
-      acf: {
-        featured_image: {
-          localFile: {
-            childImageSharp: {
-              sizes: any
-            }
-          }
-        }
-      }
-    }
-  }
+  title: string
+  content: string
+  date: string
+  excerpt: string
 }
 
-const BlogPost: FunctionComponent<IBlogPost> = ({ data }) => {
+const BlogPost: FunctionComponent<IBlogPost> = ({
+  title,
+  content,
+  date,
+  excerpt,
+}) => {
   return (
-    <Layout>
-      <SEO
-        title={data.wordpressPost.title}
-        description={data.wordpressPost.excerpt}
-      />
-      <h1>{data.wordpressPost.title}</h1>
-      <DateText>{data.wordpressPost.date}</DateText>
-      {parse(data.wordpressPost.excerpt)}
-
-      {data.wordpressPost.acf.featured_image?.localFile.childImageSharp
-        .sizes && (
-        <Img
-          sizes={
-            data.wordpressPost.acf.featured_image.localFile.childImageSharp
-              .sizes
-          }
-          alt={data.wordpressPost.title}
-          style={{ maxHeight: 450 }}
-        />
-      )}
+    <BlogPostContainer>
+      <h1>{title}</h1>
+      <DateText>{format(new Date(date), "LLLL Io")}</DateText>
+      {parse(excerpt)}
       <MasonryContainer>
-        {parse(data.wordpressPost.content, { replace: replaceMedia })}
+        {parse(content, { replace: replaceMedia })}
       </MasonryContainer>
-    </Layout>
+    </BlogPostContainer>
   )
 }
-
-export const query = graphql`
-  query($id: String) {
-    wordpressPost(id: { eq: $id }) {
-      title
-      content
-      excerpt
-      date(formatString: "MMMM DD, YYYY")
-      author {
-        name
-      }
-      acf {
-        featured_image {
-          localFile {
-            childImageSharp {
-              sizes(maxWidth: 1200) {
-                ...GatsbyImageSharpSizes
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`
 
 const getImage = (node: DomElement) => {
   if (node.name === "img") {
