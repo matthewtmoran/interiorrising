@@ -12,6 +12,7 @@
     "@emotion/styled": "^10.0.27",
     "@loadable/component": "^5.12.0",
     "browser-monads": "^1.0.0",
+    "date-fns": "^2.10.0",
     "gatsby": "^2.17.6",
     "gatsby-background-image": "^0.10.2",
     "gatsby-image": "^2.2.30",
@@ -27,15 +28,17 @@
     "gatsby-source-instagram": "^0.6.1",
     "gatsby-source-wordpress": "^3.1.54",
     "gatsby-transformer-sharp": "^2.3.1",
+    "html-react-parser": "^0.10.1",
     "prop-types": "^15.7.2",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-helmet": "^5.2.1",
+    "react-masonry-css": "^1.0.14",
     "styled-props": "^1.1.2"
   },
   "devDependencies": {
     "cross-env": "^7.0.0",
-    "prettier": "^1.18.2"
+    "prettier": "^1.19.0"
   },
   "keywords": [
     "gatsby"
