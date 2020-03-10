@@ -18,7 +18,6 @@ const Photos: FunctionComponent<IPhotos> = ({}) => {
         return (
           <BlogPost
             title={post.title}
-            description={post.description}
             content={post.content}
             date={post.date}
             excerpt={post.excerpt}

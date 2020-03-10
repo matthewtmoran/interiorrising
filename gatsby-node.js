@@ -12,11 +12,6 @@ exports.createPages = async ({ graphql, actions }) => {
             slug
             status
             template
-            acf {
-              background_image {
-                id
-              }
-            }
           }
         }
       }
@@ -28,28 +23,14 @@ exports.createPages = async ({ graphql, actions }) => {
             status
             template
             format
-            acf {
-              featured_image {
-                id
-              }
-            }
+            date
+            excerpt
+            title
           }
         }
       }
     }
   `)
-  //   const result = await graphql(`
-  //     query {
-  //       allWordpressPost {
-  //         edges {
-  //           node {
-  //             id
-  //             slug
-  //           }
-  //         }
-  //       }
-  //     }
-  //   `)
   const pageTemplate = path.resolve(`./src/templates/page.js`)
   result.data.allWordpressPage.edges.forEach(edge => {
     createPage({
@@ -60,7 +41,7 @@ exports.createPages = async ({ graphql, actions }) => {
       },
     })
   })
-  const postTemplate = path.resolve(`./src/templates/blog-post.tsx`)
+  const postTemplate = path.resolve(`./src/templates/individual-post.tsx`)
   result.data.allWordpressPost.edges.forEach(edge => {
     createPage({
       // will be the url for the page
