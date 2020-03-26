@@ -51,6 +51,19 @@ const NavLinks = styled("div")`
   }
 `
 
+const NavLink = props => (
+  <StyledLink
+    {...props}
+    getProps={({ isCurrent }) => {
+      return {
+        style: {
+          borderBottom: `2px solid ${isCurrent ? "#333" : "transparent"}`,
+        },
+      }
+    }}
+  />
+)
+
 const StyledLink = styled(Link)`
   display: block;
   text-decoration: none;
@@ -88,9 +101,10 @@ const Header = ({ siteTitle }) => {
       <MenuButton open={open} ref={menuButtonRef} />
       <Navigation>
         <NavLinks open={open} ref={ref}>
-          <StyledLink to="/">Words</StyledLink>
-          <StyledLink to="/photos">Photos</StyledLink>
-          <StyledLink to="/">Contact</StyledLink>
+          <NavLink to="/">Home</NavLink>
+          <NavLink to="/blog">Words</NavLink>
+          <NavLink to="/photos">Photos</NavLink>
+          <NavLink to="/contact">Contact</NavLink>
         </NavLinks>
       </Navigation>
     </HeaderContainer>
