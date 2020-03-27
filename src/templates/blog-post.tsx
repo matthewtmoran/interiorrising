@@ -91,7 +91,7 @@ const getImageData = (node: DomElement): IGalleryImage => {
 
     // if the image is not found in the media library for whatever reason
     if (
-      originalImage === null ||
+      !originalImage ||
       originalImage.node.localFile.childImageSharp === null
     ) {
       return {

@@ -36,7 +36,7 @@ module.exports = {
       resolve: `gatsby-source-wordpress`,
       options: {
         baseUrl: `admin.interiorrising.com`,
-        protocol: `http`,
+        protocol: `https`,
         hostingWPCOM: false,
         useACF: false,
         verbose: true,
