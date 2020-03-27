@@ -1,15 +1,23 @@
 import React, { FunctionComponent } from "react"
 import parse from "html-react-parser"
-import PostImage from "../components/post-image"
-import { DomElement } from "domhandler"
-import Masonry from "react-masonry-css"
 import styled from "@emotion/styled"
+import { DomElement } from "domhandler"
 import { format } from "date-fns"
+import { graphql, useStaticQuery } from "gatsby"
+import Img, { FluidObject } from "gatsby-image"
+import Gallery from "../components/gallery"
+import IGalleryImage from "./../interfaces/IGalleryImage"
 
 const BlogPostContainer = styled("div")`
   width: 100%;
   margin-top: 3rem;
+  margin-bottom: 3rem;
   text-align: center;
+
+  /* remove white background on gallery close cta */
+  section > svg {
+    background: transparent !important;
+  }
 `
 
 const DateText = styled("p")`
@@ -17,45 +25,21 @@ const DateText = styled("p")`
   margin: 0;
 `
 
-const MasonryContainer = styled("div")`
-  width: 100%;
-  height: 100%;
-
-  .masonry-grid_column > div {
-    margin-bottom: 5px; /* space between items */
-  }
-
-  .masonry-grid {
-    margin-left: -5px; /* gutter size offset */
-  }
-  .masonry-grid_column {
-    padding-left: 5px; /* gutter size offset */
-  }
-
-  @media (min-width: 420px) {
-    .masonry-grid {
-      margin-left: -15px; /* gutter size offset */
-    }
-    .masonry-grid_column {
-      padding-left: 15px; /* gutter size offset */
-    }
-    .masonry-grid_column > div {
-      margin-bottom: 15px; /* space between items */
-    }
-  }
-`
-const breakpointColumnsObj = {
-  default: 4,
-  1100: 3,
-  700: 2,
-  500: 2,
-}
-
 interface IBlogPost {
   title: string
   content: string
   date: string
   excerpt: string
+}
+
+interface IImage {
+  node: {
+    localFile: {
+      childImageSharp: {
+        fluid: FluidObject
+      }
+    }
+  }
 }
 
 const BlogPost: FunctionComponent<IBlogPost> = ({
@@ -69,11 +53,65 @@ const BlogPost: FunctionComponent<IBlogPost> = ({
       <h1>{title}</h1>
       <DateText>{format(new Date(date), "LLLL Io")}</DateText>
       {parse(excerpt)}
-      <MasonryContainer>
-        {parse(content, { replace: replaceMedia })}
-      </MasonryContainer>
+      {parse(content, { replace: replaceMedia })}
     </BlogPostContainer>
   )
+}
+
+const replaceMedia = (node: DomElement) => {
+  if (node.name === "ul" && node.attribs.class.includes("wp-block-gallery")) {
+    const items = node.children.map(n => getImageData(n))
+    return <Gallery images={items} />
+  }
+}
+
+const getImageData = (node: DomElement): IGalleryImage => {
+  if (
+    node.name === "li" &&
+    node.attribs.class.includes("blocks-gallery-item")
+  ) {
+    const image = getImage(node)
+    if (!image) {
+      return
+    }
+
+    // get the list of all media items
+    const { allWordpressWpMedia } = useStaticQuery(allMedia)
+
+    // get the original source url
+    const originalSource = image.attribs.src.replace(
+      /^(https?:\/\/.+?\/.+?)-(\d+x\d+)\.(.+?)$/g,
+      "$1.$3"
+    )
+
+    // the original image and meta data
+    const originalImage: IImage = allWordpressWpMedia.edges.find(
+      ({ node }) => node.source_url === originalSource
+    )
+
+    // if the image is not found in the media library for whatever reason
+    if (
+      originalImage === null ||
+      originalImage.node.localFile.childImageSharp === null
+    ) {
+      return {
+        itemId: originalSource,
+        mediaUrl: originalSource,
+        metaData: {
+          type: "image",
+        },
+      }
+    } else {
+      const { media_type, source_url, id } = originalImage.node as any
+      return {
+        itemId: id,
+        mediaUrl: source_url,
+        metaData: {
+          type: media_type,
+        },
+      }
+    }
+  }
 }
 
 const getImage = (node: DomElement) => {
@@ -87,38 +125,29 @@ const getImage = (node: DomElement) => {
   }
 }
 
-const replaceMedia = (node: DomElement) => {
-  // replaces inline gallery images with our components
-  if (
-    node.name === "li" &&
-    node.attribs.class.includes("blocks-gallery-item")
-  ) {
-    const image = getImage(node)
-    if (image !== null) {
-      return (
-        <PostImage
-          key={image.attribs.src}
-          src={image.attribs.src}
-          alt={image.attribs.alt}
-          width={image.attribs.width}
-        />
-      )
+const allMedia = graphql`
+  query {
+    allWordpressWpMedia {
+      edges {
+        node {
+          id
+          link
+          media_type
+          description
+          link
+          title
+          source_url
+          localFile {
+            publicURL
+            childImageSharp {
+              fluid(maxWidth: 800) {
+                ...GatsbyImageSharpFluid
+              }
+            }
+          }
+        }
+      }
     }
   }
-
-  // replaces gallery ul element with Masonry component
-  if (node.name === "ul" && node.attribs.class.includes("wp-block-gallery")) {
-    return (
-      <Masonry
-        style={{ display: "flex", width: "100%" }}
-        className="masonry-grid"
-        columnClassName={"masonry-grid_column"}
-        breakpointCols={breakpointColumnsObj}
-      >
-        {node.children.map(n => replaceMedia(n))}
-      </Masonry>
-    )
-  }
-}
-
+`
 export default BlogPost

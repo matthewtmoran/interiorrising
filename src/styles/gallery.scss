@@ -1,0 +1,9 @@
+div.pro-gallery
+  .gallery-item-container:not(.invert-hover)
+  .gallery-item-hover.force-hover:before,
+div.pro-gallery
+  .gallery-item-container:not(.invert-hover):hover
+  .gallery-item-hover:not(.hide-hover):before {
+  background: rgba(8, 8, 8, 0.2);
+  transition: 0.3s ease !important;
+}
