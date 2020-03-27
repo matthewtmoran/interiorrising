@@ -20,6 +20,7 @@
     "gatsby-plugin-manifest": "^2.2.25",
     "gatsby-plugin-offline": "^3.0.17",
     "gatsby-plugin-react-helmet": "^3.1.13",
+    "gatsby-plugin-sass": "^2.2.1",
     "gatsby-plugin-sharp": "^2.2.34",
     "gatsby-plugin-sitemap": "^2.2.25",
     "gatsby-plugin-typescript": "^2.1.15",
@@ -29,15 +30,17 @@
     "gatsby-source-wordpress": "^3.1.54",
     "gatsby-transformer-sharp": "^2.3.1",
     "html-react-parser": "^0.10.1",
+    "node-sass": "^4.13.1",
+    "pro-gallery": "^1.8.9",
     "prop-types": "^15.7.2",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-helmet": "^5.2.1",
-    "react-masonry-css": "^1.0.14",
     "styled-props": "^1.1.2"
   },
   "devDependencies": {
     "cross-env": "^7.0.0",
+    "jslint": "^0.12.1",
     "prettier": "^1.19.0"
   },
   "keywords": [
