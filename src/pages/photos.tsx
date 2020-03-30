@@ -21,6 +21,7 @@ const Photos: FunctionComponent<IPhotos> = ({}) => {
             content={post.content}
             date={post.date}
             excerpt={post.excerpt}
+            image={post.acf.featured_media.localFile.childImageSharp}
           />
         )
       })}
@@ -37,13 +38,20 @@ const pageQuery = graphql`
         post: node {
           id
           slug
-          status
-          template
-          format
           date
           title
           excerpt
-          content
+          acf {
+            featured_media {
+              localFile {
+                childImageSharp {
+                  fluid(maxWidth: 900, quality: 90) {
+                    ...GatsbyImageSharpFluid
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }
