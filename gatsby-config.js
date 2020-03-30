@@ -38,7 +38,7 @@ module.exports = {
         baseUrl: `admin.interiorrising.com`,
         protocol: `https`,
         hostingWPCOM: false,
-        useACF: false,
+        useACF: true,
         verbose: true,
         includedRoutes: [
           "**/categories",
