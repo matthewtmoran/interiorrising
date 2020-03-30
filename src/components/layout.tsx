@@ -23,7 +23,7 @@ const MainContainer = styled("main")`
   margin: auto;
 
   @media (min-width: 420px) {
-    max-width: 1400px;
+    max-width: 900px;
     justify-content: center;
   }
 `
