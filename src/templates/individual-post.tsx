@@ -28,6 +28,7 @@ const IndividualPost: React.FunctionComponent<IBlogPost> = ({ data }) => {
         content={post.content}
         date={post.date}
         excerpt={post.excerpt}
+        image={post.acf.featured_media.localFile.childImageSharp.fluid}
       />
 
       <h1>{post.title}</h1>
@@ -47,6 +48,17 @@ export const query = graphql`
       date(formatString: "MMMM DD, YYYY")
       author {
         name
+      }
+      acf {
+        featured_media {
+          localFile {
+            childImageSharp {
+              fluid(maxWidth: 900, quality: 90) {
+                ...GatsbyImageSharpFluid
+              }
+            }
+          }
+        }
       }
     }
   }
