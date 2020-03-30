@@ -6,7 +6,7 @@ import Hero from "../components/hero"
 import Layout from "../components/layout"
 import BackgroundImage from "gatsby-background-image"
 
-const IndexPage = () => {
+const IndexPage = ({ path }) => {
   const { image } = useStaticQuery(graphql`
     query {
       image: file(relativePath: { eq: "building-and-trees.jpg" }) {
@@ -35,7 +35,7 @@ const IndexPage = () => {
           }
         `}
       >
-        <Layout>
+        <Layout path={path}>
           <SEO title="Home" />
           <Hero />
         </Layout>

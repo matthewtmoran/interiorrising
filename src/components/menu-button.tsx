@@ -3,15 +3,13 @@ import styled from "@emotion/styled"
 
 const ButtonContainer = styled("div")`
   width: 30px;
-  height: 30px;
-  position: relative;
+  height: 21px;
   transform: rotate(0deg);
   transition: 0.5s ease-in-out;
   top: 10px;
   left: 10px;
   cursor: pointer;
-  position: absolute;
-  margin: 1rem;
+  margin: 0.75rem;
   background: transparent;
   z-index: 9;
 

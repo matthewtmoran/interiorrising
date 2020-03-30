@@ -5,12 +5,23 @@ import MenuButton from "./menu-button"
 import useOutsideClick from "../hooks/use-outside-click"
 
 const HeaderContainer = styled("header")`
-  background: transparent;
-  position: relative;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  z-index: 999;
+  background: white;
+  background: ${(props: { path: string }) =>
+    props.path === "/" ? "transparent" : "white"};
+
+  @media (min-width: 420px) {
+    background: transparent;
+    position: relative;
+    display: block;
+  }
 `
 
 const Navigation = styled("div")`
-  background: white;
   display: flex;
   height: 100%;
 
@@ -51,6 +62,15 @@ const NavLinks = styled("div")`
   }
 `
 
+const StyledLink = styled(Link)`
+  display: block;
+  text-decoration: none;
+  padding: 1rem;
+  color: #333;
+  overflow: hidden;
+  white-space: nowrap;
+`
+
 const NavLink = props => (
   <StyledLink
     {...props}
@@ -64,16 +84,7 @@ const NavLink = props => (
   />
 )
 
-const StyledLink = styled(Link)`
-  display: block;
-  text-decoration: none;
-  padding: 1rem;
-  color: #333;
-  overflow: hidden;
-  white-space: nowrap;
-`
-
-const Header = ({ siteTitle }) => {
+const Header = ({ path, siteTitle }) => {
   const [open, setOpen] = useState(false)
   const ref = useRef(null)
   const menuButtonRef = useRef(null)
@@ -97,7 +108,7 @@ const Header = ({ siteTitle }) => {
   }
 
   return (
-    <HeaderContainer>
+    <HeaderContainer path={path}>
       <MenuButton open={open} ref={menuButtonRef} />
       <Navigation>
         <NavLinks open={open} ref={ref}>
