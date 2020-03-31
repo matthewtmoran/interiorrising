@@ -10,12 +10,8 @@ const HeaderContainer = styled("header")`
   flex-direction: column;
   width: 100%;
   z-index: 999;
-  background: white;
-  background: ${(props: { path: string }) => {
-    console.log({ props })
-
-    return props.path === "/" ? "transparent" : "white"
-  }};
+  background: ${(props: { path: string }) =>
+    props.path === "/" ? "transparent" : "white"};
 
   @media (min-width: 420px) {
     background: transparent;
