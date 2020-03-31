@@ -134,10 +134,22 @@ const Header = ({ path, siteTitle }) => {
       </>
     )
   }
+  console.log({ path })
+  console.log('path === "/" ', path === "/")
   return path === "/" ? (
-    <HeaderTransparent>{renderInner()}</HeaderTransparent>
+    <HeaderTransparent>
+      {() => {
+        console.log("rendering transparent")
+        return renderInner()
+      }}
+    </HeaderTransparent>
   ) : (
-    <HeaderContainer>{renderInner()}</HeaderContainer>
+    <HeaderContainer>
+      {() => {
+        console.log("rendering white")
+        return renderInner()
+      }}
+    </HeaderContainer>
   )
 }
 
