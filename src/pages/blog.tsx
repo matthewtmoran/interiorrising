@@ -1,28 +1,29 @@
 import React, { FunctionComponent } from "react"
 import { graphql, useStaticQuery } from "gatsby"
-import PhotoPost from "../components/photo-post"
+import TextPost from "../components/text-post"
 import SEO from "../components/seo"
 import Layout from "../components/layout"
 
-interface IPhotos {}
+interface IBlogs {}
 
-const Photos: FunctionComponent<IPhotos> = ({}) => {
+const Blog: FunctionComponent<IBlogs> = ({}) => {
   const {
     data: { posts },
   } = useStaticQuery(pageQuery)
 
   return (
     <Layout>
-      <SEO title={"Photos"} description={"Photographs I've taken"} />
+      <SEO title={"Blog"} description={"Blogs I've written."} />
       {posts.map(({ post }) => {
         return (
-          <PhotoPost
-            key={post.id}
-            title={post.title}
-            slug={post.slug}
+          <TextPost
+            content={post.content}
             date={post.date}
             excerpt={post.excerpt}
-            image={post.acf.featured_media.localFile.childImageSharp}
+            image={post.acf?.featured_media.localFile.childImageSharp}
+            key={post.id}
+            slug={post.slug}
+            title={post.title}
           />
         )
       })}
@@ -33,7 +34,7 @@ const Photos: FunctionComponent<IPhotos> = ({}) => {
 const pageQuery = graphql`
   query {
     data: allWordpressPost(
-      filter: { categories: { elemMatch: { name: { eq: "Photos" } } } }
+      filter: { categories: { elemMatch: { name: { eq: "Text" } } } }
     ) {
       posts: edges {
         post: node {
@@ -41,6 +42,7 @@ const pageQuery = graphql`
           slug
           date
           title
+          content
           excerpt
           acf {
             featured_media {
@@ -58,4 +60,4 @@ const pageQuery = graphql`
     }
   }
 `
-export default Photos
+export default Blog

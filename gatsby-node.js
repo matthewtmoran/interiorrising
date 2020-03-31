@@ -1,10 +1,16 @@
 const path = require(`path`)
 const slash = require(`slash`)
+const PHOTOS = "Photos"
+const TEXT = "Text"
+
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
   const pageTemplate = path.resolve(`./src/templates/page.js`)
   const photoPostTemplate = path.resolve(
     `./src/templates/photo-post-template.tsx`
+  )
+  const textPostTemplate = path.resolve(
+    `./src/templates/text-post-template.tsx`
   )
 
   const result = await graphql(`
@@ -22,6 +28,9 @@ exports.createPages = async ({ graphql, actions }) => {
           node {
             id
             slug
+            categories {
+              name
+            }
           }
         }
       }
@@ -41,16 +50,20 @@ exports.createPages = async ({ graphql, actions }) => {
       },
     })
   })
+
   result.data.allWordpressPost.edges.forEach(edge => {
+    const { node } = edge
     createPage({
       // will be the url for the page
-      path: edge.node.slug,
+      path: node.slug,
       // specify the component template of your choice
-      component: photoPostTemplate,
+      component: node.categories.some(({ name }) => name === PHOTOS)
+        ? photoPostTemplate
+        : textPostTemplate,
       // In the ^template's GraphQL query, 'id' will be available
       // as a GraphQL variable to query for this posts's data.
       context: {
-        id: edge.node.id,
+        id: node.id,
       },
     })
   })
