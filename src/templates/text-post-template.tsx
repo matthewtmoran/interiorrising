@@ -2,7 +2,7 @@ import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import PhotoPost from "../components/photo-post"
+import TextPost from "../components/text-post"
 import { FluidObject } from "gatsby-image"
 
 interface IBlogPost {
@@ -34,12 +34,13 @@ const PhotoPostTemplate: React.FunctionComponent<IBlogPost> = ({ data }) => {
   return (
     <Layout>
       <SEO title={post.title} description={post.excerpt}></SEO>
-      <PhotoPost
-        title={post.title}
-        slug={post.slug}
+      <TextPost
+        content={post.content}
         date={post.date}
         excerpt={post.excerpt}
-        image={post.acf.featured_media.localFile.childImageSharp}
+        image={post.acf?.featured_media.localFile.childImageSharp}
+        slug={post.slug}
+        title={post.title}
       />
     </Layout>
   )
