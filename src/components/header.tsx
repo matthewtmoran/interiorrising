@@ -5,20 +5,26 @@ import MenuButton from "./menu-button"
 import useOutsideClick from "../hooks/use-outside-click"
 import { css } from "@emotion/core"
 
-const HeaderContainer = styled.header((props: any) => ({
-  position: "fixed",
-  display: "flex",
-  flexDirection: "column",
-  width: "100%",
-  zIndex: 999,
-  background: props.path !== "/" ? "#fff" : "transparent",
+const HeaderContainer = styled.header((props: any) => {
+  console.log({ props })
+  console.log(props.path)
+  console.log('props.path === "/" ', props.path === "/")
 
-  // @media (min-width: 420px) {
-  //   background: transparent;
-  //   position: relative;
-  //   display: block;
-  // }
-}))
+  return {
+    position: "fixed",
+    display: "flex",
+    flexDirection: "column",
+    width: "100%",
+    zIndex: 999,
+    background: props.path === "/" ? "transparent" : "#fff",
+
+    // @media (min-width: 420px) {
+    //   background: transparent;
+    //   position: relative;
+    //   display: block;
+    // }
+  }
+})
 
 const Navigation = styled("div")`
   display: flex;
