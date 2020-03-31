@@ -3,21 +3,7 @@ import { Link } from "gatsby"
 import styled from "@emotion/styled"
 import MenuButton from "./menu-button"
 import useOutsideClick from "../hooks/use-outside-click"
-
-const HeaderTransparent = styled("header")`
-  position: fixed;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  z-index: 999;
-  background: transparent;
-
-  @media (min-width: 420px) {
-    background: transparent;
-    position: relative;
-    display: block;
-  }
-`
+import { Location } from "@reach/router"
 
 const HeaderContainer = styled("header")`
   position: fixed;
@@ -25,8 +11,8 @@ const HeaderContainer = styled("header")`
   flex-direction: column;
   width: 100%;
   z-index: 999;
-  background: white;
-
+  background: ${(props: { pathname: string }) =>
+    props.pathname === "/" ? "transparent" : "#fff"};
   @media (min-width: 420px) {
     background: transparent;
     position: relative;
@@ -97,7 +83,7 @@ const NavLink = props => (
   />
 )
 
-const Header = ({ path, siteTitle }) => {
+const Header = ({ siteTitle }) => {
   const [open, setOpen] = useState(false)
   const ref = useRef(null)
   const menuButtonRef = useRef(null)
@@ -119,32 +105,24 @@ const Header = ({ path, siteTitle }) => {
       return setOpen(false)
     }
   }
-  console.log({ path })
-  console.log('path === "/" ', path === "/")
-  return path === "/" ? (
-    <HeaderTransparent>
-      <MenuButton open={open} ref={menuButtonRef} />
-      <Navigation>
-        <NavLinks open={open} ref={ref}>
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="/blog">Blog</NavLink>
-          <NavLink to="/photos">Photos</NavLink>
-          <NavLink to="/contact">Contact</NavLink>
-        </NavLinks>
-      </Navigation>
-    </HeaderTransparent>
-  ) : (
-    <HeaderContainer>
-      <MenuButton open={open} ref={menuButtonRef} />
-      <Navigation>
-        <NavLinks open={open} ref={ref}>
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="/blog">Blog</NavLink>
-          <NavLink to="/photos">Photos</NavLink>
-          <NavLink to="/contact">Contact</NavLink>
-        </NavLinks>
-      </Navigation>
-    </HeaderContainer>
+  return (
+    <Location>
+      {locationProps => {
+        return (
+          <HeaderContainer pathname={locationProps.location.pathname}>
+            <MenuButton open={open} ref={menuButtonRef} />
+            <Navigation>
+              <NavLinks open={open} ref={ref}>
+                <NavLink to="/">Home</NavLink>
+                <NavLink to="/blog">Blog</NavLink>
+                <NavLink to="/photos">Photos</NavLink>
+                <NavLink to="/contact">Contact</NavLink>
+              </NavLinks>
+            </Navigation>
+          </HeaderContainer>
+        )
+      }}
+    </Location>
   )
 }
 
