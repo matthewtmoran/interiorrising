@@ -3,28 +3,36 @@ import { Link } from "gatsby"
 import styled from "@emotion/styled"
 import MenuButton from "./menu-button"
 import useOutsideClick from "../hooks/use-outside-click"
-import { css } from "@emotion/core"
 
-const HeaderContainer = styled.header((props: any) => {
-  console.log({ props })
-  console.log(props.path)
-  console.log('props.path === "/" ', props.path === "/")
+const HeaderTransparent = styled("header")`
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  z-index: 999;
+  background: transparent;
 
-  return {
-    position: "fixed",
-    display: "flex",
-    flexDirection: "column",
-    width: "100%",
-    zIndex: 999,
-    background: props.path === "/" ? "transparent" : "#fff",
-
-    // @media (min-width: 420px) {
-    //   background: transparent;
-    //   position: relative;
-    //   display: block;
-    // }
+  @media (min-width: 420px) {
+    background: transparent;
+    position: relative;
+    display: block;
   }
-})
+`
+
+const HeaderContainer = styled("header")`
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  z-index: 999;
+  background: white;
+
+  @media (min-width: 420px) {
+    background: transparent;
+    position: relative;
+    display: block;
+  }
+`
 
 const Navigation = styled("div")`
   display: flex;
@@ -111,19 +119,25 @@ const Header = ({ path, siteTitle }) => {
       return setOpen(false)
     }
   }
-
-  return (
-    <HeaderContainer path={path}>
-      <MenuButton open={open} ref={menuButtonRef} />
-      <Navigation>
-        <NavLinks open={open} ref={ref}>
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="/blog">Blog</NavLink>
-          <NavLink to="/photos">Photos</NavLink>
-          <NavLink to="/contact">Contact</NavLink>
-        </NavLinks>
-      </Navigation>
-    </HeaderContainer>
+  const renderInner = () => {
+    return (
+      <>
+        <MenuButton open={open} ref={menuButtonRef} />
+        <Navigation>
+          <NavLinks open={open} ref={ref}>
+            <NavLink to="/">Home</NavLink>
+            <NavLink to="/blog">Blog</NavLink>
+            <NavLink to="/photos">Photos</NavLink>
+            <NavLink to="/contact">Contact</NavLink>
+          </NavLinks>
+        </Navigation>
+      </>
+    )
+  }
+  return path === "/" ? (
+    <HeaderTransparent>{renderInner()}</HeaderTransparent>
+  ) : (
+    <HeaderContainer>{renderInner()}</HeaderContainer>
   )
 }
 
