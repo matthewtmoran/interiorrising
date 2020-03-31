@@ -1,28 +1,12 @@
 import React, { FunctionComponent } from "react"
-import { Link } from "gatsby"
 import parse from "html-react-parser"
-import styled from "@emotion/styled"
 import { format } from "date-fns"
 import Img from "gatsby-image"
+import DateText from "../shared/DateText"
+import BlogTitle from "../shared/BlogTitle"
+import BlogPostContainer from "../shared/BlogPostContainer"
 
-const BlogTitle = styled(Link)`
-  color: #333;
-  text-decoration: none;
-`
-
-const BlogPostContainer = styled("div")`
-  width: 100%;
-  margin-top: 3rem;
-  margin-bottom: 3rem;
-  text-align: center;
-`
-
-const DateText = styled("p")`
-  font-style: italic;
-  margin: 0;
-`
-
-interface IBlogPost {
+interface IPhotoPost {
   date: string
   excerpt: string
   image: any
@@ -30,7 +14,7 @@ interface IBlogPost {
   title: string
 }
 
-const BlogPost: FunctionComponent<IBlogPost> = ({
+const PhotoPost: FunctionComponent<IPhotoPost> = ({
   date,
   excerpt,
   image,
@@ -49,4 +33,4 @@ const BlogPost: FunctionComponent<IBlogPost> = ({
   )
 }
 
-export default BlogPost
+export default PhotoPost
