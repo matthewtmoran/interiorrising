@@ -119,36 +119,31 @@ const Header = ({ path, siteTitle }) => {
       return setOpen(false)
     }
   }
-  const renderInner = () => {
-    return (
-      <>
-        <MenuButton open={open} ref={menuButtonRef} />
-        <Navigation>
-          <NavLinks open={open} ref={ref}>
-            <NavLink to="/">Home</NavLink>
-            <NavLink to="/blog">Blog</NavLink>
-            <NavLink to="/photos">Photos</NavLink>
-            <NavLink to="/contact">Contact</NavLink>
-          </NavLinks>
-        </Navigation>
-      </>
-    )
-  }
   console.log({ path })
   console.log('path === "/" ', path === "/")
   return path === "/" ? (
     <HeaderTransparent>
-      {() => {
-        console.log("rendering transparent")
-        return renderInner()
-      }}
+      <MenuButton open={open} ref={menuButtonRef} />
+      <Navigation>
+        <NavLinks open={open} ref={ref}>
+          <NavLink to="/">Home</NavLink>
+          <NavLink to="/blog">Blog</NavLink>
+          <NavLink to="/photos">Photos</NavLink>
+          <NavLink to="/contact">Contact</NavLink>
+        </NavLinks>
+      </Navigation>
     </HeaderTransparent>
   ) : (
     <HeaderContainer>
-      {() => {
-        console.log("rendering white")
-        return renderInner()
-      }}
+      <MenuButton open={open} ref={menuButtonRef} />
+      <Navigation>
+        <NavLinks open={open} ref={ref}>
+          <NavLink to="/">Home</NavLink>
+          <NavLink to="/blog">Blog</NavLink>
+          <NavLink to="/photos">Photos</NavLink>
+          <NavLink to="/contact">Contact</NavLink>
+        </NavLinks>
+      </Navigation>
     </HeaderContainer>
   )
 }
