@@ -2,7 +2,8 @@ import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import BlogPost from "./blog-post"
+import BlogPost from "../components/blog-post"
+import { FluidObject } from "gatsby-image"
 
 interface IBlogPost {
   data: {
@@ -11,30 +12,35 @@ interface IBlogPost {
       excerpt: string
       date: string
       content: string
+      slug: string
       author: {
         name: string
+      }
+      acf: {
+        featured_media: {
+          localFile: {
+            childImageSharp: {
+              fluid: FluidObject
+            }
+          }
+        }
       }
     }
   }
 }
 
-const IndividualPost: React.FunctionComponent<IBlogPost> = ({ data }) => {
+const PhotoPostTemplate: React.FunctionComponent<IBlogPost> = ({ data }) => {
   const { post } = data
   return (
     <Layout>
       <SEO title={post.title} description={post.excerpt}></SEO>
       <BlogPost
         title={post.title}
-        content={post.content}
+        slug={post.slug}
         date={post.date}
         excerpt={post.excerpt}
-        image={post.acf.featured_media.localFile.childImageSharp.fluid}
+        image={post.acf.featured_media.localFile.childImageSharp}
       />
-
-      <h1>{post.title}</h1>
-      <p>
-        Written by {post.author.name} on {post.date}
-      </p>
     </Layout>
   )
 }
@@ -45,6 +51,7 @@ export const query = graphql`
       title
       content
       excerpt
+      slug
       date(formatString: "MMMM DD, YYYY")
       author {
         name
@@ -64,4 +71,4 @@ export const query = graphql`
   }
 `
 
-export default IndividualPost
+export default PhotoPostTemplate

@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react"
 import { graphql, useStaticQuery } from "gatsby"
-import BlogPost from "../templates/blog-post"
+import BlogPost from "../components/blog-post"
 import SEO from "../components/seo"
 import Layout from "../components/layout"
 
@@ -17,8 +17,9 @@ const Photos: FunctionComponent<IPhotos> = ({}) => {
       {posts.map(({ post }) => {
         return (
           <BlogPost
+            key={post.id}
             title={post.title}
-            content={post.content}
+            slug={post.slug}
             date={post.date}
             excerpt={post.excerpt}
             image={post.acf.featured_media.localFile.childImageSharp}
