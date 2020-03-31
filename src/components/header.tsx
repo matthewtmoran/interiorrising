@@ -3,6 +3,7 @@ import { Link } from "gatsby"
 import styled from "@emotion/styled"
 import MenuButton from "./menu-button"
 import useOutsideClick from "../hooks/use-outside-click"
+import { css } from "@emotion/core"
 
 const HeaderContainer = styled("header")`
   position: fixed;
@@ -10,12 +11,15 @@ const HeaderContainer = styled("header")`
   flex-direction: column;
   width: 100%;
   z-index: 999;
-  background: ${(props: { path: string }) => {
-    console.log({ props })
-    console.log("props.path === '/' ", props.path === "/")
 
-    return props.path === "/" ? "transparent" : "white"
-  }};
+  ${(props: { path: string }) =>
+    props.path === "/"
+      ? css`
+          background: "transparent";
+        `
+      : css`
+          background: #fff;
+        `};
 
   @media (min-width: 420px) {
     background: transparent;
