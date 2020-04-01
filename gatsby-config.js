@@ -1,9 +1,23 @@
+const environment =
+  process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || "development"
+
+require("dotenv").config({ path: `.env.${environment}` })
+
 module.exports = {
   siteMetadata: {
     title: `Interior Rising`,
-    description: `All things Enneagram`,
-    author: `Matthew Moran`,
-    siteUrl: `https://interiorrising.com`,
+    description: `Jillian's site for enneagram coaching, photography, and writings.`,
+    author: `Jillian Moran`,
+    siteUrl: process.env.SITE_URL,
+    headerLinks: [
+      { name: "Home", to: "/" },
+      { name: "Photos", to: "/photos" },
+      { name: "Blog", to: "/blog" },
+      { name: "Contact", to: "/contact" },
+    ],
+    socialNetworks: {
+      instagram: process.env.INSTAGRAM_ACCOUNT,
+    },
   },
   plugins: [
     `gatsby-plugin-sitemap`,
@@ -35,7 +49,7 @@ module.exports = {
     {
       resolve: `gatsby-source-wordpress`,
       options: {
-        baseUrl: `admin.interiorrising.com`,
+        baseUrl: process.env.BASE_URL,
         protocol: `https`,
         hostingWPCOM: false,
         useACF: true,
@@ -64,6 +78,7 @@ module.exports = {
         analyzerMode: "static",
       },
     },
+    `gatsby-plugin-recaptcha`,
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
