@@ -8,7 +8,7 @@ module.exports = {
     title: `Interior Rising`,
     description: `Jillian's site for enneagram coaching, photography, and writings.`,
     author: `Jillian Moran`,
-    siteUrl: process.env.SITE_URL,
+    siteUrl: process.env.GATSBY_SITE_URL,
     headerLinks: [
       { name: "Home", to: "/" },
       { name: "Photos", to: "/photos" },
@@ -16,7 +16,7 @@ module.exports = {
       { name: "Contact", to: "/contact" },
     ],
     socialNetworks: {
-      instagram: process.env.INSTAGRAM_ACCOUNT,
+      instagram: process.env.GATSBY_INSTAGRAM_ACCOUNT,
     },
   },
   plugins: [
@@ -49,7 +49,7 @@ module.exports = {
     {
       resolve: `gatsby-source-wordpress`,
       options: {
-        baseUrl: process.env.BASE_URL,
+        baseUrl: process.env.GATSBY_BASE_URL,
         protocol: `https`,
         hostingWPCOM: false,
         useACF: true,
