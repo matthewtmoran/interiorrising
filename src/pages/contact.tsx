@@ -94,6 +94,7 @@ const Button = styled("button")`
 
 const Contact: React.FunctionComponent<IContact> = ({}) => {
   console.log("process.env.RECAPTCHA_SITE_KEY", process.env.RECAPTCHA_SITE_KEY)
+  console.log("process.env.API_URL", process.env.API_URL)
   return (
     <Layout>
       <SEO
