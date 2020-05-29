@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from "react"
+import { Global, css } from "@emotion/core"
 import styled from "@emotion/styled"
 import { useStaticQuery, graphql } from "gatsby"
 
@@ -11,7 +12,7 @@ const MainContainer = styled("main")`
   align-items: center;
   flex-direction: column;
   justify-content: flex-start;
-
+  padding: 3rem 1.5rem;
   margin: auto;
 
   @media (min-width: 420px) {
@@ -37,17 +38,22 @@ const Layout: FunctionComponent<ILayout> = ({ path, children }) => {
 
   return (
     <>
+      <Global
+        styles={css`
+          h1,
+          h2,
+          h3,
+          h4,
+          p,
+          a,
+          button,
+          div {
+            font-family: "Roboto Condensed";
+          }
+        `}
+      />
       <Header siteTitle={data.site.siteMetadata.title} path={path} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 1400,
-          padding: `0px 1.45rem`,
-          paddingTop: 0,
-        }}
-      >
-        <MainContainer>{children}</MainContainer>
-      </div>
+      <MainContainer>{children}</MainContainer>
     </>
   )
 }
