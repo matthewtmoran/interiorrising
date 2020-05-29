@@ -11,7 +11,7 @@ interface IContact {}
 
 const FORM_ID = "97"
 const VALIDATION_FAILED = "validation_failed"
-const formUrl = `${process.env.API_URL}/wp-json/contact-form-7/v1/contact-forms/${FORM_ID}/feedback`
+const formUrl = `${process.env.GATSBY_API_URL}/wp-json/contact-form-7/v1/contact-forms/${FORM_ID}/feedback`
 
 const initialValues = {
   name: "",
@@ -159,7 +159,7 @@ const Contact: React.FunctionComponent<IContact> = ({}) => {
               <StyleErrorMessage name="message" component="div" />
 
               <Recaptcha
-                sitekey={process.env.RECAPTCHA_SITE_KEY}
+                sitekey={process.env.GATSBY_RECAPTCHA_SITE_KEY}
                 render="explicit"
                 verifyCallback={response => {
                   setFieldValue("recaptcha", response)
