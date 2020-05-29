@@ -115,7 +115,6 @@ const Header = ({ siteTitle }) => {
               <NavLinks open={open} ref={ref}>
                 <NavLink to="/">Home</NavLink>
                 <NavLink to="/blog">Blog</NavLink>
-                <NavLink to="/photos">Photos</NavLink>
                 <NavLink to="/contact">Contact</NavLink>
               </NavLinks>
             </Navigation>
