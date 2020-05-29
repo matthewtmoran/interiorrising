@@ -5,13 +5,13 @@ require("dotenv").config({ path: `.env.${environment}` })
 
 module.exports = {
   siteMetadata: {
-    title: `Interior Rising`,
+    title: `Jill The Human`,
     description: `Jillian's site for enneagram coaching, photography, and writings.`,
     author: `Jillian Moran`,
     siteUrl: process.env.SITE_URL,
     headerLinks: [
       { name: "Home", to: "/" },
-      { name: "Photos", to: "/photos" },
+      { name: "Enneagram", to: "/enneagram" },
       { name: "Blog", to: "/blog" },
       { name: "Contact", to: "/contact" },
     ],
