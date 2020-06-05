@@ -10,7 +10,7 @@ const PAGE = "home"
 const IndexPage = ({ location }) => {
   const { image } = useStaticQuery(graphql`
     query {
-      image: file(relativePath: { eq: "building-and-trees.jpg" }) {
+      image: file(relativePath: { eq: "building-and-trees-light.jpg" }) {
         sharp: childImageSharp {
           fluid(quality: 100) {
             ...GatsbyImageSharpFluid_withWebp
