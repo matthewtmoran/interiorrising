@@ -5,17 +5,117 @@ import MenuButton from "./menu-button"
 import useOutsideClick from "../hooks/use-outside-click"
 import { Location } from "@reach/router"
 
+const isHome = (pathname: string) => {
+  return pathname === "/"
+}
+
+const shouldInvert = (pathname: string) => {
+  // it should invert if its' not one of these routes
+  const blackRoutes = ["/", "/blog"]
+  return blackRoutes.indexOf(pathname) < 0
+}
+
+const NavLink = props => {
+  return (
+    <StyledLink
+      {...props}
+      getProps={({ isCurrent, ...rest }) => {
+        console.log({ rest })
+        // default is transparent when not active
+        let color = "transparent"
+        if (isCurrent) {
+          if (!props.invert) {
+            // if current but no invert prop is passed, set to black
+            color = "#333"
+          } else {
+            // if invert is true set to white
+            color = "#fff"
+          }
+        }
+        return {
+          style: {
+            borderBottom: `2px solid ${color}`,
+          },
+        }
+      }}
+    />
+  )
+}
+
+const Header = ({ siteTitle, invert }) => {
+  const [open, setOpen] = useState(false)
+  const ref = useRef(null)
+  const menuButtonRef = useRef(null)
+  useOutsideClick(ref, handleButtonClick)
+
+  function handleButtonClick(event) {
+    if (
+      !open &&
+      (menuButtonRef.current === event.target ||
+        menuButtonRef.current.contains(event.target))
+    ) {
+      return setOpen(true)
+    }
+    if (
+      open &&
+      ref.current !== event.target &&
+      !ref.current.contains(event.target)
+    ) {
+      return setOpen(false)
+    }
+  }
+  return (
+    <Location>
+      {locationProps => {
+        return (
+          <HeaderContainer>
+            <MenuButton open={open} ref={menuButtonRef} />
+            <Navigation>
+              <NavLinks open={open} ref={ref}>
+                <NavLink
+                  invert={shouldInvert(locationProps.location.pathname)}
+                  to="/"
+                >
+                  Home
+                </NavLink>
+                <NavLink
+                  invert={shouldInvert(locationProps.location.pathname)}
+                  to="/enneagram"
+                >
+                  Enneagram
+                </NavLink>
+                <NavLink
+                  invert={shouldInvert(locationProps.location.pathname)}
+                  to="/blog"
+                >
+                  Blog
+                </NavLink>
+                <NavLink
+                  invert={shouldInvert(locationProps.location.pathname)}
+                  to="/contact"
+                >
+                  Contact
+                </NavLink>
+              </NavLinks>
+            </Navigation>
+          </HeaderContainer>
+        )
+      }}
+    </Location>
+  )
+}
+
+export default Header
+
 const HeaderContainer = styled("header")`
   position: fixed;
   display: flex;
   flex-direction: column;
   width: 100%;
   z-index: 999;
-  background: ${(props: { pathname: string }) =>
-    props.pathname === "/" ? "transparent" : "#fff"};
+  background: transparent;
   @media (min-width: 420px) {
-    background: transparent;
-    position: relative;
+    position: absolute;
     display: block;
   }
 `
@@ -68,62 +168,9 @@ const StyledLink = styled(Link)`
   color: #333;
   overflow: hidden;
   white-space: nowrap;
-`
+  font-family: "Roboto Condensed";
 
-const NavLink = props => (
-  <StyledLink
-    {...props}
-    getProps={({ isCurrent }) => {
-      return {
-        style: {
-          borderBottom: `2px solid ${isCurrent ? "#333" : "transparent"}`,
-        },
-      }
-    }}
-  />
-)
-
-const Header = ({ siteTitle }) => {
-  const [open, setOpen] = useState(false)
-  const ref = useRef(null)
-  const menuButtonRef = useRef(null)
-  useOutsideClick(ref, handleButtonClick)
-
-  function handleButtonClick(event) {
-    if (
-      !open &&
-      (menuButtonRef.current === event.target ||
-        menuButtonRef.current.contains(event.target))
-    ) {
-      return setOpen(true)
-    }
-    if (
-      open &&
-      ref.current !== event.target &&
-      !ref.current.contains(event.target)
-    ) {
-      return setOpen(false)
-    }
+  @media (min-width: 420px) {
+    color: ${({ invert }: { invert: boolean }) => (invert ? "#fff" : "#333")};
   }
-  return (
-    <Location>
-      {locationProps => {
-        return (
-          <HeaderContainer pathname={locationProps.location.pathname}>
-            <MenuButton open={open} ref={menuButtonRef} />
-            <Navigation>
-              <NavLinks open={open} ref={ref}>
-                <NavLink to="/">Home</NavLink>
-                <NavLink to="/enneagram">Enneagram</NavLink>
-                <NavLink to="/blog">Blog</NavLink>
-                <NavLink to="/contact">Contact</NavLink>
-              </NavLinks>
-            </Navigation>
-          </HeaderContainer>
-        )
-      }}
-    </Location>
-  )
-}
-
-export default Header
+`

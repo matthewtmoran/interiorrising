@@ -8,7 +8,7 @@ module.exports = {
     title: `Jill The Human`,
     description: `Jillian's site for enneagram coaching, photography, and writings.`,
     author: `Jillian Moran`,
-    siteUrl: process.env.GATSBY_SITE_URL,
+    siteUrl: "https://jillthehuman.com",
     headerLinks: [
       { name: "Home", to: "/" },
       { name: "Enneagram", to: "/enneagram" },
@@ -82,11 +82,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-fonts`,
       options: {
-        fonts: [
-          `Roboto Condensed`,
-
-          // `source sans pro\:300,400,400i,700`, // you can also specify font weights and styles
-        ],
+        fonts: [`Roboto Condensed`],
         display: "swap",
       },
     },

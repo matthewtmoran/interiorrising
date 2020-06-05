@@ -1,71 +1,7 @@
 import React from "react"
 import styled from "@emotion/styled"
-import { css } from "@emotion/core"
-import { graphql, useStaticQuery } from "gatsby"
+import { Link, graphql, useStaticQuery } from "gatsby"
 import Img from "gatsby-image"
-
-const ImageBackground = styled("div")`
-  background-image: url("/images/building-and-trees.jpg");
-  background-position: top 20% center;
-  background-size: cover;
-  height: 50vh;
-
-  + * {
-    margin-top: 0;
-  }
-`
-const HeroContainer = styled("div")`
-  display: flex;
-  align-items: center;
-  align-self: center;
-  justify-content: start;
-  flex-direction: column;
-  margin-top: 10%;
-
-  @media (min-width: 420px) {
-    margin-top: 20%;
-    flex-direction: row;
-  }
-`
-const ImageContainer = styled("div")`
-  max-width: 100%;
-  margin: 0px 2rem;
-  max-height: 300px;
-  max-height: 200px;
-  border-radius: 50%;
-  overflow: hidden;
-  width: 200px;
-
-  @media (min-width: 420px) {
-    width: 300px;
-    max-height: 300px;
-  }
-`
-
-const TextContainer = styled("div")`
-  display: flex;
-  flex-direction: column;
-`
-
-const SubText = styled("div")`
-  font-weight: bold;
-  color: black;
-  font-size: 0.75rem;
-
-  @media (min-width: 420px) {
-    font-size: 1rem;
-  }
-`
-const HeroText = styled("h1")`
-  margin: 1rem;
-  font-size: 3rem;
-  color: black;
-
-  @media (min-width: 420px) {
-    margin: 0px 2rem 1rem;
-    font-size: 4rem;
-  }
-`
 
 const Hero: React.FunctionComponent = () => {
   const { image } = useStaticQuery(graphql`
@@ -90,12 +26,12 @@ const Hero: React.FunctionComponent = () => {
           css={{
             display: "flex",
             justifyContent: "space-between",
-            padding: "0 3rem",
+            padding: "0 1rem",
           }}
         >
-          <SubText>Photography</SubText>
-          <SubText>Writings</SubText>
-          <SubText>Enneagram</SubText>
+          <SubText to="blog">Words</SubText>
+          <SubText to="enneagram">Enneagram Guide</SubText>
+          <SubText to="contact">Contact Me</SubText>
         </div>
       </TextContainer>
     </HeroContainer>
@@ -103,3 +39,65 @@ const Hero: React.FunctionComponent = () => {
 }
 
 export default Hero
+
+const HeroContainer = styled("div")`
+  display: flex;
+  align-items: center;
+  align-self: center;
+  justify-content: start;
+  flex-direction: column;
+  margin-top: 10%;
+  width: 100%;
+
+  @media (min-width: 420px) {
+    margin-top: 15%;
+    flex-direction: row;
+  }
+`
+const ImageContainer = styled("div")`
+  max-width: 100%;
+  margin: 0px 2rem;
+  max-height: 300px;
+  max-height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+  width: 200px;
+
+  @media (min-width: 420px) {
+    width: 300px;
+    max-height: 300px;
+  }
+`
+
+const TextContainer = styled("div")`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  @media (min-width: 420px) {
+    width: unset;
+    font-size: 2rem;
+  }
+`
+
+const SubText = styled(Link)`
+  font-weight: bold;
+  color: black;
+  font-size: 1.2rem;
+
+  @media (min-width: 420px) {
+    font-size: 1.5rem;
+  }
+`
+const HeroText = styled("h1")`
+  margin: 1rem;
+  font-size: 3rem;
+  color: black;
+  text-align: center;
+
+  @media (min-width: 420px) {
+    text-align: left;
+    margin: 0px 2rem 1rem;
+    font-size: 4rem;
+  }
+`
