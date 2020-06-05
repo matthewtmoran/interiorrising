@@ -4,6 +4,7 @@ import BackgroundImage from "gatsby-background-image"
 import { Link, useStaticQuery, graphql } from "gatsby"
 import Header from "./header"
 import "./layout-styles.css"
+import Footer from "./Footer"
 
 interface ILayout {
   path?: string
@@ -46,6 +47,7 @@ const Layout: FunctionComponent<ILayout> = ({
           invert={invertHeader}
         />
         <MainContainer>{children}</MainContainer>
+        <Footer />
       </StyledBackgroundImage>
     )
   }
