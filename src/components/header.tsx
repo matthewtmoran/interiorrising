@@ -20,7 +20,6 @@ const NavLink = props => {
     <StyledLink
       {...props}
       getProps={({ isCurrent, ...rest }) => {
-        console.log({ rest })
         // default is transparent when not active
         let color = "transparent"
         if (isCurrent) {
