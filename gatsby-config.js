@@ -20,6 +20,17 @@ module.exports = {
     },
   },
   plugins: [
+    {
+      resolve: `gatsby-plugin-gtag`,
+      options: {
+        // your google analytics tracking id
+        trackingId: `UA-61203089-3`,
+        // Puts tracking script in the head instead of the body
+        head: false,
+        // enable ip anonymization
+        anonymize: true,
+      },
+    },
     `gatsby-plugin-sitemap`,
     `gatsby-plugin-emotion`,
     `gatsby-transformer-sharp`,
@@ -84,28 +95,6 @@ module.exports = {
       options: {
         fonts: [`Roboto Condensed`],
         display: "swap",
-      },
-    },
-    {
-      resolve: `gatsby-plugin-google-analytics`,
-      options: {
-        trackingId: "UA-61203089-3",
-        // Defines where to place the tracking script - `true` in the head and `false` in the body
-        head: false,
-        // Setting this parameter is optional
-        anonymize: true,
-        // Setting this parameter is also optional
-        respectDNT: true,
-        // Avoids sending pageview hits from custom paths
-        exclude: [],
-        // Delays sending pageview hits on route update (in milliseconds)
-        pageTransitionDelay: 0,
-        // Enables Google Optimize using your container Id
-        defer: false,
-        // Any additional optional fields
-        sampleRate: 5,
-        siteSpeedSampleRate: 10,
-        cookieDomain: "example.com",
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
