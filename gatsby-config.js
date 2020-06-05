@@ -6,7 +6,7 @@ require("dotenv").config({ path: `.env.${environment}` })
 module.exports = {
   siteMetadata: {
     title: `Jill The Human`,
-    description: `Jillian's site for enneagram coaching, photography, and writings.`,
+    description: `Information about enneagram guidance, enneagram courses, and writings.`,
     author: `Jillian Moran`,
     siteUrl: process.env.GATSBY_SITE_URL,
     headerLinks: [
@@ -105,7 +105,7 @@ module.exports = {
         },
       },
     },
-
+    "gatsby-plugin-robots-txt",
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
