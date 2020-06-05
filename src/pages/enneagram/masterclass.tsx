@@ -8,6 +8,9 @@ import Layout, {
 } from "../../components/layout"
 import { useStaticQuery, graphql } from "gatsby"
 import SimpleForm from "../../components/SimpleForm"
+import seoConfig from "../../utils/page-seo-config"
+
+const PAGE = "masterclass"
 
 const MasterClass: React.FunctionComponent<{}> = ({}) => {
   const { image } = useStaticQuery(graphql`
@@ -23,12 +26,7 @@ const MasterClass: React.FunctionComponent<{}> = ({}) => {
   `)
   return (
     <Layout backgroundImage={image}>
-      <SEO
-        title={"Enneagram Master Class"}
-        description={
-          "Information about enneagram coaching, enneagram workshops, enneagram speaking events, and enneagram courses.  "
-        }
-      />
+      <SEO {...seoConfig[PAGE]} />
       <Backdrop>
         <InnerContainer>
           <H1>1-1 Enneagram Masterclass</H1>

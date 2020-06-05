@@ -3,6 +3,9 @@ import { graphql, useStaticQuery } from "gatsby"
 import SEO from "../components/seo"
 import Hero from "../components/hero"
 import Layout from "../components/layout"
+import seoConfig from "../utils/page-seo-config"
+
+const PAGE = "home"
 
 const IndexPage = ({ location }) => {
   const { image } = useStaticQuery(graphql`
@@ -19,7 +22,7 @@ const IndexPage = ({ location }) => {
   return (
     <>
       <Layout backgroundImage={image} location={location}>
-        <SEO title="Home" />
+        <SEO {...seoConfig[PAGE]} />
         <Hero />
       </Layout>
     </>

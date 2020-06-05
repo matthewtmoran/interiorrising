@@ -3,6 +3,9 @@ import { graphql, useStaticQuery } from "gatsby"
 import TextPost from "../components/text-post"
 import SEO from "../components/seo"
 import Layout from "../components/layout"
+import seoConfig from "../utils/page-seo-config"
+
+const PAGE = "blog"
 
 interface IBlogs {}
 
@@ -13,7 +16,7 @@ const Blog: FunctionComponent<IBlogs> = ({}) => {
 
   return (
     <Layout>
-      <SEO title={"Blog"} description={"Blogs I've written."} />
+      <SEO {...seoConfig[PAGE]} />
       {posts.map(({ post }) => {
         return (
           <TextPost

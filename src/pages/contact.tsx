@@ -3,6 +3,9 @@ import { useStaticQuery, graphql } from "gatsby"
 import SEO from "../components/seo"
 import Layout, { Backdrop, InnerContainer, H1, P } from "../components/layout"
 import GenericForm from "../components/GenericForm"
+import seoConfig from "../utils/page-seo-config"
+
+const PAGE = "contact"
 
 interface IContact {}
 
@@ -20,10 +23,7 @@ const Contact: React.FunctionComponent<IContact> = ({}) => {
   `)
   return (
     <Layout backgroundImage={image}>
-      <SEO
-        title={"Contact"}
-        description={"Contact me.  Hire me.  Talk to me."}
-      />
+      <SEO {...seoConfig[PAGE]} />
       <Backdrop>
         <InnerContainer>
           <H1>Contact</H1>

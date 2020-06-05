@@ -9,6 +9,9 @@ import Layout, {
   P,
 } from "../components/layout"
 import { useStaticQuery, graphql } from "gatsby"
+import seoConfig from "../utils/page-seo-config"
+
+const PAGE = "enneagram"
 
 const Enneagram: React.FunctionComponent<{}> = ({}) => {
   const { image } = useStaticQuery(graphql`
@@ -24,12 +27,7 @@ const Enneagram: React.FunctionComponent<{}> = ({}) => {
   `)
   return (
     <Layout backgroundImage={image}>
-      <SEO
-        title={"Enneagram"}
-        description={
-          "Information about enneagram coaching, enneagram workshops, enneagram speaking events, and enneagram courses.  "
-        }
-      />
+      <SEO {...seoConfig[PAGE]} />
       <Backdrop>
         <InnerContainer>
           <H1>Lets Talk Enneagram</H1>
