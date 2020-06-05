@@ -8,7 +8,7 @@ module.exports = {
     title: `Jill The Human`,
     description: `Jillian's site for enneagram coaching, photography, and writings.`,
     author: `Jillian Moran`,
-    siteUrl: "https://jillthehuman.com",
+    siteUrl: process.env.GATSBY_SITE_URL,
     headerLinks: [
       { name: "Home", to: "/" },
       { name: "Enneagram", to: "/enneagram" },
@@ -84,6 +84,28 @@ module.exports = {
       options: {
         fonts: [`Roboto Condensed`],
         display: "swap",
+      },
+    },
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: "UA-61203089-3",
+        // Defines where to place the tracking script - `true` in the head and `false` in the body
+        head: false,
+        // Setting this parameter is optional
+        anonymize: true,
+        // Setting this parameter is also optional
+        respectDNT: true,
+        // Avoids sending pageview hits from custom paths
+        exclude: [],
+        // Delays sending pageview hits on route update (in milliseconds)
+        pageTransitionDelay: 0,
+        // Enables Google Optimize using your container Id
+        defer: false,
+        // Any additional optional fields
+        sampleRate: 5,
+        siteSpeedSampleRate: 10,
+        cookieDomain: "example.com",
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
