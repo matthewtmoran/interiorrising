@@ -23,7 +23,7 @@ const Blog: FunctionComponent<IBlogs> = ({}) => {
             content={post.content}
             date={post.date}
             excerpt={post.excerpt}
-            image={post.acf?.featured_media.localFile.childImageSharp}
+            // image={post.acf?.featured_media.localFile.childImageSharp}
             key={post.id}
             slug={post.slug}
             title={post.title}
@@ -47,17 +47,17 @@ const pageQuery = graphql`
           title
           content
           excerpt
-          acf {
-            featured_media {
-              localFile {
-                childImageSharp {
-                  fluid(maxWidth: 900, quality: 90) {
-                    ...GatsbyImageSharpFluid
-                  }
-                }
-              }
-            }
-          }
+          # acf {
+          #   featured_media {
+          #     localFile {
+          #       childImageSharp {
+          #         fluid(maxWidth: 900, quality: 90) {
+          #           ...GatsbyImageSharpFluid
+          #         }
+          #       }
+          #     }
+          #   }
+          # }
         }
       }
     }

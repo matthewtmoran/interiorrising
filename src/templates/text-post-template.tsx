@@ -16,15 +16,15 @@ interface IBlogPost {
       author: {
         name: string
       }
-      acf: {
-        featured_media: {
-          localFile: {
-            childImageSharp: {
-              fluid: FluidObject
-            }
-          }
-        }
-      }
+      // acf: {
+      //   featured_media: {
+      //     localFile: {
+      //       childImageSharp: {
+      //         fluid: FluidObject
+      //       }
+      //     }
+      //   }
+      // }
     }
   }
 }
@@ -38,7 +38,7 @@ const PhotoPostTemplate: React.FunctionComponent<IBlogPost> = ({ data }) => {
         content={post.content}
         date={post.date}
         excerpt={post.excerpt}
-        image={post.acf?.featured_media.localFile.childImageSharp}
+        // image={post.acf?.featured_media.localFile.childImageSharp}
         slug={post.slug}
         title={post.title}
       />
@@ -57,17 +57,17 @@ export const query = graphql`
       author {
         name
       }
-      acf {
-        featured_media {
-          localFile {
-            childImageSharp {
-              fluid(maxWidth: 900, quality: 90) {
-                ...GatsbyImageSharpFluid
-              }
-            }
-          }
-        }
-      }
+      # acf {
+      #   featured_media {
+      #     localFile {
+      #       childImageSharp {
+      #         fluid(maxWidth: 900, quality: 90) {
+      #           ...GatsbyImageSharpFluid
+      #         }
+      #       }
+      #     }
+      #   }
+      # }
     }
   }
 `

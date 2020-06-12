@@ -16,15 +16,15 @@ interface IBlogPost {
       author: {
         name: string
       }
-      acf: {
-        featured_media: {
-          localFile: {
-            childImageSharp: {
-              fluid: FluidObject
-            }
-          }
-        }
-      }
+      //   acf: {
+      //     featured_media: {
+      //       localFile: {
+      //         childImageSharp: {
+      //           fluid: FluidObject
+      //         }
+      //       }
+      //     }
+      //   }
     }
   }
 }
@@ -56,17 +56,17 @@ export const query = graphql`
       author {
         name
       }
-      acf {
-        featured_media {
-          localFile {
-            childImageSharp {
-              fluid(maxWidth: 900, quality: 90) {
-                ...GatsbyImageSharpFluid
-              }
-            }
-          }
-        }
-      }
+      # acf {
+      #   featured_media {
+      #     localFile {
+      #       childImageSharp {
+      #         fluid(maxWidth: 900, quality: 90) {
+      #           ...GatsbyImageSharpFluid
+      #         }
+      #       }
+      #     }
+      #   }
+      # }
     }
   }
 `

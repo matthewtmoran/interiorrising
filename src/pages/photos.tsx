@@ -22,7 +22,8 @@ const Photos: FunctionComponent<IPhotos> = ({}) => {
             slug={post.slug}
             date={post.date}
             excerpt={post.excerpt}
-            image={post.acf.featured_media.localFile.childImageSharp}
+            image={null}
+            // image={post.acf.featured_media.localFile.childImageSharp}
           />
         )
       })}
@@ -42,17 +43,17 @@ const pageQuery = graphql`
           date
           title
           excerpt
-          acf {
-            featured_media {
-              localFile {
-                childImageSharp {
-                  fluid(maxWidth: 900, quality: 90) {
-                    ...GatsbyImageSharpFluid
-                  }
-                }
-              }
-            }
-          }
+          # acf {
+          #   featured_media {
+          #     localFile {
+          #       childImageSharp {
+          #         fluid(maxWidth: 900, quality: 90) {
+          #           ...GatsbyImageSharpFluid
+          #         }
+          #       }
+          #     }
+          #   }
+          # }
         }
       }
     }

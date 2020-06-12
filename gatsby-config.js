@@ -63,7 +63,7 @@ module.exports = {
         baseUrl: process.env.GATSBY_BASE_URL,
         protocol: `https`,
         hostingWPCOM: false,
-        useACF: true,
+        useACF: false,
         verbose: true,
         includedRoutes: [
           "**/categories",
