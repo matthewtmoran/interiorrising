@@ -16,6 +16,11 @@ interface IBlogPost {
       author: {
         name: string
       }
+      yoast_meta: {
+        yoast_wpseo_metadesc: string
+        yoast_wpseo_title: string
+      }
+
       // acf: {
       //   featured_media: {
       //     localFile: {
@@ -29,11 +34,14 @@ interface IBlogPost {
   }
 }
 
-const PhotoPostTemplate: React.FunctionComponent<IBlogPost> = ({ data }) => {
+const TextPostTemplate: React.FunctionComponent<IBlogPost> = ({ data }) => {
   const { post } = data
   return (
     <Layout>
-      <SEO title={post.title} description={post.excerpt}></SEO>
+      <SEO
+        title={post.title || post.yoast_meta.yoast_wpseo_title}
+        description={post.excerpt || post.yoast_meta.yoast_wpseo_metadesc}
+      />
       <TextPost
         content={post.content}
         date={post.date}
@@ -57,6 +65,10 @@ export const query = graphql`
       author {
         name
       }
+      yoast_meta {
+        yoast_wpseo_metadesc
+        yoast_wpseo_title
+      }
       # acf {
       #   featured_media {
       #     localFile {
@@ -72,4 +84,4 @@ export const query = graphql`
   }
 `
 
-export default PhotoPostTemplate
+export default TextPostTemplate
