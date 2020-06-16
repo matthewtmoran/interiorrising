@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "@emotion/styled"
+import { keyframes } from "@emotion/core"
 import { Link, graphql, useStaticQuery } from "gatsby"
 import Img from "gatsby-image"
 
@@ -40,6 +41,16 @@ const Hero: React.FunctionComponent = () => {
 
 export default Hero
 
+const slideUpFadeIn = keyframes`
+    0% {
+        opacity:0;
+        transform:  translate(0px,40px)  ;
+    }
+    100% {
+        opacity:1;
+        transform:  translate(0px,0px)  ;
+    } 
+`
 const HeroContainer = styled("div")`
   display: flex;
   align-items: center;
@@ -48,6 +59,13 @@ const HeroContainer = styled("div")`
   flex-direction: column;
   margin-top: 10%;
   width: 100%;
+
+  animation-iteration-count: 1;
+  transform-origin: 50% 50%;
+  animation-fill-mode: forwards;
+  animation: ${slideUpFadeIn} 1s ease;
+  opacity: 0;
+  opacity: 1\9;
 
   @media (min-width: 420px) {
     margin-top: 15%;
@@ -84,6 +102,18 @@ const SubText = styled(Link)`
   font-weight: bold;
   color: black;
   font-size: 1.2rem;
+  text-decoration: none;
+
+  &:after {
+    display: block;
+    content: "";
+    border-bottom: solid 3px #54949c;
+    transform: scaleX(0);
+    transition: transform 250ms ease-in-out;
+  }
+  &:hover:after {
+    transform: scaleX(1);
+  }
 
   @media (min-width: 420px) {
     font-size: 1.5rem;
