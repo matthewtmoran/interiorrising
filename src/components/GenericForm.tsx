@@ -31,7 +31,7 @@ const Schema = Yup.object().shape({
     .required("Required"),
   message: Yup.string()
     .min(2, "Too Short!")
-    .max(50, "Too Long!")
+    .max(500, "Too Long!")
     .required("Required"),
   email: Yup.string()
     .email("Invalid email")
