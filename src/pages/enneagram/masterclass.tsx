@@ -44,7 +44,7 @@ const MasterClass: React.FunctionComponent<{}> = ({}) => {
             others.
           </P>
         </InnerContainer>
-        <SimpleForm formId={"102"} />
+        <SimpleForm formName="masterclass" />
       </Backdrop>
     </Layout>
   )

@@ -37,6 +37,12 @@ const Schema = Yup.object().shape({
     .required("Required"),
 })
 
+const encode = data => {
+  return Object.keys(data)
+    .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+    .join("&")
+}
+
 const GenericForm: React.FunctionComponent<IGenericForm> = ({}) => {
   return (
     <StyledContainer>
@@ -47,28 +53,27 @@ const GenericForm: React.FunctionComponent<IGenericForm> = ({}) => {
           setSubmitting(true)
           setStatus(undefined)
 
-          const bodyFormData = new FormData()
-          bodyFormData.set("user-name", values.name)
-          bodyFormData.set("user-email", values.email)
-          bodyFormData.set("user-message", values.message)
+          fetch("/?no-cache=1", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: encode({
+              "form-name": `general-contact`,
 
-          axios
-            .post(formUrl, bodyFormData, {
-              headers: { "Content-Type": "application/json; charset=UTF-8" },
-            })
-            .then(function(response) {
-              if (response.data.status === VALIDATION_FAILED) {
-                return setStatus({
-                  [response.data.status]: response.data.message,
-                })
-              }
+              ...values,
+            }),
+          })
+            .then(response => {
+              console.log({ response })
+
               resetForm()
               setStatus("success")
             })
-            .catch(function(error) {
+            .catch(error => {
+              console.log({ error })
               setStatus("fail")
             })
             .finally(() => {
+              console.log("finally")
               setSubmitting(false)
             })
         }}
@@ -79,7 +84,13 @@ const GenericForm: React.FunctionComponent<IGenericForm> = ({}) => {
               Thanks for reaching out! I'll get back to you shortly.
             </Label>
           ) : (
-            <StyledForm>
+            <StyledForm
+              name={`general-contact`}
+              data-netlify="true"
+              netlify-honeypot="bot-field"
+            >
+              <input type="hidden" name="form-name" value={`general-contact`} />
+              <input type="hidden" name="bot-field" />
               <Label htmlFor="name">Name*</Label>
               <InputField type="text" name="name" />
               <StyleErrorMessage name="name" component="div" />

@@ -3,12 +3,12 @@ import { graphql } from "gatsby"
 
 class Page extends Component {
   render() {
-    const StaticPage = this.props.data.wordpressPage
+    // const StaticPage = this.props.data.wordpressPage
 
     return (
       <>
-        <h1>{StaticPage.title}</h1>
-        <div>{StaticPage.content}</div>
+        {/* <h1>{StaticPage.title}</h1>
+        <div>{StaticPage.content}</div> */}
       </>
     )
   }
@@ -16,18 +16,18 @@ class Page extends Component {
 
 export default Page
 
-export const pageQuery = graphql`
-  query($id: String!) {
-    wordpressPage(id: { eq: $id }) {
-      title
-      content
-    }
-    site {
-      id
-      siteMetadata {
-        title
-        # subtitle
-      }
-    }
-  }
-`
+// export const pageQuery = graphql`
+//   query($id: String!) {
+//     wordpressPage(id: { eq: $id }) {
+//       title
+//       content
+//     }
+//     site {
+//       id
+//       siteMetadata {
+//         title
+//         # subtitle
+//       }
+//     }
+//   }
+// `

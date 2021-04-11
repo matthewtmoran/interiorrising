@@ -38,7 +38,7 @@ const Guidance: React.FunctionComponent<{}> = ({}) => {
             real life circumstances and relationships with care and curiosity.
           </P>
         </InnerContainer>
-        <SimpleForm formId={"101"} />
+        <SimpleForm formName="guidance" />
       </Backdrop>
     </Layout>
   )

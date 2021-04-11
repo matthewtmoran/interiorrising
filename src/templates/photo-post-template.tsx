@@ -45,30 +45,30 @@ const PhotoPostTemplate: React.FunctionComponent<IBlogPost> = ({ data }) => {
   )
 }
 
-export const query = graphql`
-  query($id: String) {
-    post: wordpressPost(id: { eq: $id }) {
-      title
-      content
-      excerpt
-      slug
-      date(formatString: "MMMM DD, YYYY")
-      author {
-        name
-      }
-      # acf {
-      #   featured_media {
-      #     localFile {
-      #       childImageSharp {
-      #         fluid(maxWidth: 900, quality: 90) {
-      #           ...GatsbyImageSharpFluid
-      #         }
-      #       }
-      #     }
-      #   }
-      # }
-    }
-  }
-`
+// export const query = graphql`
+//   query($id: String) {
+//     post: wordpressPost(id: { eq: $id }) {
+//       title
+//       content
+//       excerpt
+//       slug
+//       date(formatString: "MMMM DD, YYYY")
+//       author {
+//         name
+//       }
+//       # acf {
+//       #   featured_media {
+//       #     localFile {
+//       #       childImageSharp {
+//       #         fluid(maxWidth: 900, quality: 90) {
+//       #           ...GatsbyImageSharpFluid
+//       #         }
+//       #       }
+//       #     }
+//       #   }
+//       # }
+//     }
+//   }
+// `
 
 export default PhotoPostTemplate

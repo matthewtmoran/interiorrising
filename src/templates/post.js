@@ -4,7 +4,7 @@ import PropTypes from "prop-types"
 
 class Post extends Component {
   render() {
-    const post = this.props.data.wordpressPost
+    // const post = this.props.data.wordpressPost
 
     return (
       <>
@@ -22,17 +22,17 @@ Post.propTypes = {
 
 export default Post
 
-export const postQuery = graphql`
-  query($id: String!) {
-    wordpressPost(id: { eq: $id }) {
-      title
-      content
-    }
-    site {
-      siteMetadata {
-        title
-        # subtitle
-      }
-    }
-  }
-`
+// export const postQuery = graphql`
+//   query($id: String!) {
+//     wordpressPost(id: { eq: $id }) {
+//       title
+//       content
+//     }
+//     site {
+//       siteMetadata {
+//         title
+//         # subtitle
+//       }
+//     }
+//   }
+// `

@@ -57,29 +57,29 @@ module.exports = {
         icon: `src/images/favicon.png`, // This path is relative to the root of the site.
       },
     },
-    {
-      resolve: `gatsby-source-wordpress`,
-      options: {
-        baseUrl: process.env.GATSBY_BASE_URL,
-        protocol: `https`,
-        hostingWPCOM: false,
-        useACF: false,
-        verbose: true,
-        includedRoutes: [
-          "**/categories",
-          "**/posts",
-          "**/pages",
-          "**/media",
-          "**/tags",
-          "**/taxonomies",
-          "**/users",
-        ],
-        excludedRoutes: [],
-        normalizer: function({ entities }) {
-          return entities
-        },
-      },
-    },
+    // {
+    //   resolve: `gatsby-source-wordpress`,
+    //   options: {
+    //     baseUrl: process.env.GATSBY_BASE_URL,
+    //     protocol: `https`,
+    //     hostingWPCOM: false,
+    //     useACF: false,
+    //     verbose: true,
+    //     includedRoutes: [
+    //       "**/categories",
+    //       "**/posts",
+    //       "**/pages",
+    //       "**/media",
+    //       "**/tags",
+    //       "**/taxonomies",
+    //       "**/users",
+    //     ],
+    //     excludedRoutes: [],
+    //     normalizer: function({ entities }) {
+    //       return entities
+    //     },
+    //   },
+    // },
     {
       resolve: "gatsby-plugin-webpack-bundle-analyzer",
       options: {
@@ -89,7 +89,7 @@ module.exports = {
         analyzerMode: "static",
       },
     },
-    `gatsby-plugin-recaptcha`,
+    // `gatsby-plugin-recaptcha`,
     {
       resolve: `gatsby-plugin-google-fonts`,
       options: {

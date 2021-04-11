@@ -83,12 +83,12 @@ const Header = ({ siteTitle, invert }) => {
                 >
                   Enneagram
                 </NavLink>
-                <NavLink
+                {/* <NavLink
                   invert={shouldInvert(locationProps.location.pathname)}
                   to="/blog"
                 >
                   Blog
-                </NavLink>
+                </NavLink> */}
                 <NavLink
                   invert={shouldInvert(locationProps.location.pathname)}
                   to="/contact"

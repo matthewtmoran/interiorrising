@@ -10,14 +10,14 @@ const PAGE = "blog"
 interface IBlogs {}
 
 const Blog: FunctionComponent<IBlogs> = ({}) => {
-  const {
-    data: { posts },
-  } = useStaticQuery(pageQuery)
+  // const {
+  //   data: { posts },
+  // } = useStaticQuery(pageQuery)
 
   return (
     <Layout>
       <SEO {...seoConfig[PAGE]} />
-      {posts.map(({ post }) => {
+      {/* {posts.map(({ post }) => {
         return (
           <TextPost
             content={post.content}
@@ -29,38 +29,38 @@ const Blog: FunctionComponent<IBlogs> = ({}) => {
             title={post.title}
           />
         )
-      })}
+      })} */}
     </Layout>
   )
 }
 
-const pageQuery = graphql`
-  query {
-    data: allWordpressPost(
-      filter: { categories: { elemMatch: { name: { eq: "Text" } } } }
-    ) {
-      posts: edges {
-        post: node {
-          id
-          slug
-          date
-          title
-          content
-          excerpt
-          # acf {
-          #   featured_media {
-          #     localFile {
-          #       childImageSharp {
-          #         fluid(maxWidth: 900, quality: 90) {
-          #           ...GatsbyImageSharpFluid
-          #         }
-          #       }
-          #     }
-          #   }
-          # }
-        }
-      }
-    }
-  }
-`
+// const pageQuery = graphql`
+//   query {
+//     data: allWordpressPost(
+//       filter: { categories: { elemMatch: { name: { eq: "Text" } } } }
+//     ) {
+//       posts: edges {
+//         post: node {
+//           id
+//           slug
+//           date
+//           title
+//           content
+//           excerpt
+//           # acf {
+//           #   featured_media {
+//           #     localFile {
+//           #       childImageSharp {
+//           #         fluid(maxWidth: 900, quality: 90) {
+//           #           ...GatsbyImageSharpFluid
+//           #         }
+//           #       }
+//           #     }
+//           #   }
+//           # }
+//         }
+//       }
+//     }
+//   }
+// `
 export default Blog

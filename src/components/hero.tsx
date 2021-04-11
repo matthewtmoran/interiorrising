@@ -30,7 +30,7 @@ const Hero: React.FunctionComponent = () => {
             padding: "0 1rem",
           }}
         >
-          <SubText to="blog">Words</SubText>
+          <SubText to="/">Words</SubText>
           <SubText to="enneagram">Enneagram Guide</SubText>
           <SubText to="contact">Contact Me</SubText>
         </div>
